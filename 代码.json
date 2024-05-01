@@ -2,7 +2,7 @@
 	"info": {
 		"_postman_id": "37622a20-b13e-437d-8f76-a0cdb51b5c4f",
 		"name": "Giffgaff",
-		"description": "一個為 Giffgaff 在不受支持的設備上生成 eSIM 二維碼的工具\n\n"
+		"description": "一個為 Giffgaff 在不受支持的設備上生成 eSIM 二維碼的工具",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "34239733"
 	},
@@ -34,32 +34,32 @@
 				},
 				"url": {
 					"raw": "https://id.giffgaff.com/v4/mfa/challenge/me",
-					“协议”：“https”，
-					“主持人”： [
-						“ID”，
-						“吉夫加夫”，
-						“com”
+					"protocol": "https",
+					"host": [
+						"id",
+						"giffgaff",
+						"com"
 					],
-					“小路”： [
-						“v4”，
-						“外交部”，
-						“挑战”，
-						“我”
+					"path": [
+						"v4",
+						"mfa",
+						"challenge",
+						"me"
 					]
 				}
 			},
-			“回复”： []
+			"response": []
 		},
 		{
-			"name": "检查邮件认证码 验证邮箱代码",
-			“事件”： [
+			"name": "檢查郵件認證碼 Verify Email code",
+			"event": [
 				{
-					“听”：“测试”，
-					“脚本”： {
-						“执行”：[
+					"listen": "test",
+					"script": {
+						"exec": [
 							"pm.collectionVariables.set(\"email_signature\", pm.response.json().signature);"
 						],
-						“类型”：“文本/javascript”，
+						"type": "text/javascript",
 						"packages": {}
 					}
 				},
@@ -74,12 +74,12 @@
 					}
 				}
 			],
-			“要求”： {
-				“方法”：“发布”，
-				“标题”：[]，
-				“身体”： {
-					“模式”：“原始”，
-					"raw": "{\r\n\t\"ref\": \"{{email_code_ref}}\",\r\n\t\"code\": \"{{email_code}}\"\ r\n}",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\t\"ref\": \"{{email_code_ref}}\",\r\n\t\"code\": \"{{email_code}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -146,34 +146,34 @@
 						"variables": ""
 					}
 				},
-				“网址”：{
-					“原始”：“https://publicapi.giffgaff.com/gateway/graphql”，
-					“协议”：“https”，
-					“主持人”： [
-						“公共API”，
-						“吉夫加夫”，
-						“com”
+				"url": {
+					"raw": "https://publicapi.giffgaff.com/gateway/graphql",
+					"protocol": "https",
+					"host": [
+						"publicapi",
+						"giffgaff",
+						"com"
 					],
-					“小路”： [
-						“网关”，
-						“graphql”
+					"path": [
+						"gateway",
+						"graphql"
 					]
 				}
 			},
-			“回复”： []
+			"response": []
 		},
 		{
-			"name": "申请SIM卡预留SIM",
-			“事件”： [
+			"name": "申請 SIM卡 Reserve SIM",
+			"event": [
 				{
-					“听”：“测试”，
-					“脚本”： {
-						“执行”：[
+					"listen": "test",
+					"script": {
+						"exec": [
 							"pm.collectionVariables.set(\"esim_ssn\", pm.response.json().data.reserveESim.esim.ssn);\r",
 							"pm.collectionVariables.set(\"esim_activation_code\", pm.response.json().data.reserveESim.esim.activationCode);\r",
-							””
+							""
 						],
-						“类型”：“文本/javascript”，
+						"type": "text/javascript",
 						"packages": {}
 					}
 				}
@@ -436,188 +436,188 @@
 						"com"
 					],
 					"path": [
-						“网关”，
-						“graphql”
+						"gateway",
+						"graphql"
 					]
 				}
 			},
-			“回复”： []
+			"response": []
 		},
 		{
-			"name": "产生QRCode 获取ESIM QRCode",
-			“要求”： {
-				“方法”：“发布”，
-				“标题”：[
+			"name": "產生QRCode Get ESIM QRCode",
+			"request": {
+				"method": "POST",
+				"header": [
 					{
-						"key": "接受",
-						“值”：“图像/svg+xml”，
-						“类型”：“文本”
+						"key": "Accept",
+						"value": "image/svg+xml",
+						"type": "text"
 					},
 					{
-						"key": "X-QR-宽度",
-						“值”：“400”，
-						“类型”：“文本”，
-						“取消”：正确
+						"key": "X-QR-Width",
+						"value": "400",
+						"type": "text",
+						"disabled": true
 					},
 					{
-						"key": "X-QR-高度",
-						“值”：“400”，
-						“类型”：“文本”，
-						“取消”：正确
+						"key": "X-QR-Height",
+						"value": "400",
+						"type": "text",
+						"disabled": true
 					}
 				],
-				“身体”： {
-					“模式”：“原始”，
-					“原始”：“{{lpa_string}}”，
-					“选项”： {
-						“生的”： {
-							“语言”：“json”
+				"body": {
+					"mode": "raw",
+					"raw": "{{lpa_string}}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
 					}
 				},
-				“网址”：{
+				"url": {
 					"raw": "https://qrcode.show/",
-					“协议”：“https”，
-					“主持人”：[
-						“二维码”，
-						“展示”
+					"protocol": "https",
+					"host": [
+						"qrcode",
+						"show"
 					],
-					“小路”： [
-						””
+					"path": [
+						""
 					]
 				}
 			},
-			“回复”： []
+			"response": []
 		}
 	],
-	“授权”：{
-		“类型”：“oauth2”，
-		“oauth2”：[
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
 			{
 				"key": "refreshRequestParams",
-				“价值”： []，
-				“类型”：“任何”
+				"value": [],
+				"type": "any"
 			},
 			{
 				"key": "tokenRequestParams",
-				“价值”： []，
-				“类型”：“任何”
+				"value": [],
+				"type": "any"
 			},
 			{
 				"key": "authRequestParams",
-				“价值”： []，
-				“类型”：“任何”
+				"value": [],
+				"type": "any"
 			},
 			{
-				"key": "令牌名称",
-				“价值”：“吉夫加夫”，
-				“类型”：“字符串”
+				"key": "tokenName",
+				"value": "Giffgaff",
+				"type": "string"
 			},
 			{
-				"key": "挑战算法",
-				“值”：“S256”，
-				“类型”：“字符串”
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
 			},
 			{
-				“键”：“状态”，
-				“值”：“cd34c1ef-f1c7-4d5c-8030-bf9753a2ccd5”，
-				“类型”：“字符串”
+				"key": "state",
+				"value": "cd34c1ef-f1c7-4d5c-8030-bf9753a2ccd5",
+				"type": "string"
 			},
 			{
-				“关键”：“范围”，
-				“值”：“读”，
-				“类型”：“字符串”
+				"key": "scope",
+				"value": "read",
+				"type": "string"
 			},
 			{
-				“键”：“redirect_uri”，
-				"值": "giffgaff://auth/callback/",
-				“类型”：“字符串”
+				"key": "redirect_uri",
+				"value": "giffgaff://auth/callback/",
+				"type": "string"
 			},
 			{
-				“密钥”：“授予类型”，
-				“值”：“authorization_code_with_pkce”，
-				“类型”：“字符串”
+				"key": "grant_type",
+				"value": "authorization_code_with_pkce",
+				"type": "string"
 			},
 			{
-				“键”：“客户端秘密”，
-				“值”：“OQv4cfiyol8TvCW4yiLGj0c1AkTR3N2JfRzq7XGqMxk =”，
-				“类型”：“字符串”
+				"key": "clientSecret",
+				"value": "OQv4cfiyol8TvCW4yiLGj0c1AkTR3N2JfRzq7XGqMxk=",
+				"type": "string"
 			},
 			{
 				"key": "clientId",
-				“值”：“4a05bf219b3985647d9b9a3ba610a9ce”，
-				“类型”：“字符串”
+				"value": "4a05bf219b3985647d9b9a3ba610a9ce",
+				"type": "string"
 			},
 			{
 				"key": "authUrl",
-				“值”：“https://id.giffgaff.com/auth/oauth/authorize”，
-				“类型”：“字符串”
+				"value": "https://id.giffgaff.com/auth/oauth/authorize",
+				"type": "string"
 			},
 			{
 				"key": "addTokenTo",
-				“值”：“标题”，
-				“类型”：“字符串”
+				"value": "header",
+				"type": "string"
 			},
 			{
-				“SSH”：“客户端身份验证”，
-				“值”：“标题”，
-				“类型”：“字符串”
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
 			},
 			{
 				"key": "accessTokenUrl",
-				“值”：“https://id.giffgaff.com/auth/oauth/token”，
-				“类型”：“字符串”
+				"value": "https://id.giffgaff.com/auth/oauth/token",
+				"type": "string"
 			}
 		]
 	},
-	“事件”： [
+	"event": [
 		{
-			“听”：“预先请求”，
-			“天际”： {
-				“类型”：“文本/javascript”，
-				“执行”：[
-					””
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
 				]
 			}
 		},
 		{
-			“听”：“测试”，
-			“天际”： {
-				“类型”：“文本/javascript”，
-				“执行”：[
-					””
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
 				]
 			}
 		}
 	],
-	“多变的”：[
+	"variable": [
 		{
-			"key": "成员ID",
-			“价值”：“”
+			"key": "memberId",
+			"value": ""
 		},
 		{
-			“键”：“esim_ssn”，
-			“价值”：“”
+			"key": "esim_ssn",
+			"value": ""
 		},
 		{
-			“键”：“esim_activation_code”，
-			“价值”：“”
+			"key": "esim_activation_code",
+			"value": ""
 		},
 		{
 			"key": "email_code_ref",
-			“价值”：“”
+			"value": ""
 		},
 		{
-			“SSH”：“电子邮件签名”，
-			“价值”：“”
+			"key": "email_signature",
+			"value": ""
 		},
 		{
-			“键”：“lpa_string”，
-			“价值”：“”
+			"key": "lpa_string",
+			"value": ""
 		},
 		{
-			“SSH”：“电子邮件代码”，
-			“价值”：“”
+			"key": "email_code",
+			"value": ""
 		}
 	]
 }
